@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read and download CSV file </title>
+    <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="nav">
+        <h3>Govind Prasad Lakhotia</h3>
+        <a href="https://github.com/gplakhotiya">github</a>
+    </div>
+    <br>
+    <br>
+    <input type="file" acccept=".csv" id="picker">
+    <br>
+    <hr>
+    <br>
+    <button onclick="ExportToExcel('xlsx')">Download</button>
+    <table id="table">
+    </table>
+    <br>
+
+    <script>
+        window.onload = () => {
+            var read = new FileReader();
+            var picker = document.getElementById("picker");
+            var table = document.getElementById("table");
+            picker.onchange = () => read.readAsText(picker.files[0]);
+            read.onloadend = () => {
+                let csv = read.result;
+                table.innerHTML = "";
+
+                let rows = csv.split("\n");
+                for (let row of rows) {
+                    let clearedRows = row.replaceAll(",,", ", -- ,")
+                    let cols = clearedRows.match(/(?:\"([^\"]*(?:\"\"[^\"]*)*)\")|([^\",]+)/g);
+                    let tr = table.insertRow();
+                    for (let col of cols) {
+                        let td = tr.insertCell();
+                        td.innerHTML = col;
+                    }
+                }
+            };
+        };
+
+
+        function ExportToExcel(type, fn, dl) {
+            var elt = document.getElementById('table');
+            var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+            return dl ?
+                XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }) :
+                XLSX.writeFile(wb, fn || ('MySheetName.' + (type || 'xlsx')));
+        }
+
+    </script>
+</body>
+
+</html>

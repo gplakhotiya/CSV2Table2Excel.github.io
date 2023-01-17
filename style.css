@@ -1,0 +1,62 @@
+.nav {
+    position: sticky;
+    background-color: rgb(64, 64, 212);
+    color: white;
+    display: flex;
+}
+
+.nav h3 {
+    margin-top: 20px;
+}
+
+.nav h3:hover {
+    color: red;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+    margin-top: 20px;
+    font-size: large;
+    font-weight: bold;
+
+}
+
+.nav a:hover {
+    text-transform: capitalize;
+    color: pink;
+}
+
+body {
+    background-color: beige;
+}
+
+#table {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2f6;
+}
+
+tr:hover {
+    background-color: rgb(137, 129, 184);
+}
+
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #294c67;
+    ;
+    color: white;
+}
